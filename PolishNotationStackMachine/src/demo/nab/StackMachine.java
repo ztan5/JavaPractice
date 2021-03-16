@@ -200,18 +200,40 @@ public class StackMachine {
      */
     public String print() {
         if (elements.isEmpty()) {
-            return "[]";
+            return "";
         }
         StringBuilder s1 = new StringBuilder();
-        s1.append("[ ");
         BigDecimal[] arr = (BigDecimal[]) elements.toArray();
         for (int i = 0; i < arr.length; i++) {
             s1.append(arr[i]);
-            if (i != arr.length - 1) {
-                s1.append(", ");
-            } else {
-                s1.append(" ]");
-            }
+            //new line separated string for display
+            //Use System.lineSeparator() to let it work in all OS.
+            s1.append(System.lineSeparator());
+        }
+        return s1.toString();
+    }
+
+    /**
+     * Print all stack contents of history stack
+     *
+     * @return String all elements separated by new line
+     */
+    public String printCommand() {
+        if (history.isEmpty()) {
+            return "";
+        }
+        StringBuilder s1 = new StringBuilder();
+        Command[] arr = (Command[]) history.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            Command cmd = arr[i];
+            s1.append(cmd.getLhs());
+            s1.append(", ");
+            s1.append(cmd.getRhs() == null ? " " : cmd.getRhs());
+            s1.append(", ");
+            s1.append(cmd.getCommand().toUpperCase());
+            //new line separated string for display
+            //Use System.lineSeparator() to let it work in all OS.
+            s1.append(System.lineSeparator());
         }
         return s1.toString();
     }
