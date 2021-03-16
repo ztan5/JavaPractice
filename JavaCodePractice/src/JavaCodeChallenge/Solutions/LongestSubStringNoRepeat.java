@@ -23,7 +23,7 @@ public class LongestSubStringNoRepeat {
             return 1;
         }
 
-        Stack<Character> stack = new Stack<Character>();
+        Stack<Character> stack = new Stack<>();
         int maxSize = 0;
         int tmpSize = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -32,7 +32,7 @@ public class LongestSubStringNoRepeat {
             if (distance == -1) {
                 stack.push(c);
             } else {
-                ArrayList tmpArray = new ArrayList<Character>();
+                ArrayList tmpArray = new ArrayList();
                 while (!stack.isEmpty()) {
                     Character tmpC = stack.pop();
                     tmpSize++;
