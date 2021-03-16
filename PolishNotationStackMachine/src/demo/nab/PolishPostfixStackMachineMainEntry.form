@@ -35,15 +35,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" pref="360" max="-2" attributes="0"/>
+                  <Component id="logTextField" min="-2" pref="360" max="-2" attributes="0"/>
                   <EmptySpace pref="394" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="quitButton" min="-2" pref="112" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -51,24 +51,30 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jTextField2" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="logTextField" min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="quitButton" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="quitButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quit"/>
+            <Property name="text" type="java.lang.String" value="QUIT"/>
+            <Property name="name" type="java.lang.String" value="quitButton" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="logTextField">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Log:"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -93,39 +99,39 @@
                                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton8" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="mulButton" min="-2" pref="117" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton7" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="negButton" min="-2" pref="117" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton4" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="clearButton" min="-2" pref="117" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton9" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="addButton" min="-2" pref="117" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="117" max="-2" attributes="0"/>
+                                  <Component id="invertButton" min="-2" pref="117" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jTextField1" max="32767" attributes="0"/>
+                                  <Component id="elementInputTextField" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" pref="117" max="-2" attributes="0"/>
+                                  <Component id="pushButton" min="-2" pref="117" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Component id="popButton" min="-2" pref="117" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Component id="undoButton" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -137,24 +143,24 @@
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton4" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="clearButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="addButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton8" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jButton7" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="mulButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="negButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton5" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="invertButton" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="undoButton" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace pref="52" max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="popButton" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="elementInputTextField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="pushButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -166,47 +172,44 @@
             <Property name="text" type="java.lang.String" value="Supported Instructions"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Input number and click Push or hit Enter"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="elementInputTextField">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="popButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="POP"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="pushButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="PUSH"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="clearButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="CLEAR"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="invertButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="INV"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="undoButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;&lt;UNDO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="negButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="NEG"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton8">
+        <Component class="javax.swing.JButton" name="mulButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="MUL"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="addButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="ADD"/>
           </Properties>
@@ -259,7 +262,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="elementsTextArea">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -339,7 +342,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea2">
+                <Component class="javax.swing.JTextArea" name="commandsTextArea">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
