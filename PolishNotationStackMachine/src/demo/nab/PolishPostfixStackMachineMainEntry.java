@@ -5,18 +5,87 @@
  */
 package demo.nab;
 
+import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.util.EmptyStackException;
+
 /**
+ * Polish Postfix Stack Machine GUI code
  *
  * @author tangz
  */
 public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
+
+    private static final BigDecimal MAX_LIMIT = new BigDecimal(9999999);
+    private static final BigDecimal MIN_LIMIT = new BigDecimal(-9999999);
     private StackMachine stackMachine;
+
     /**
      * Creates new form PolishPostfixStackMachineDialog
      */
     public PolishPostfixStackMachineMainEntry() {
         initComponents();
         stackMachine = new StackMachine();
+        elementInputTextField.grabFocus();
+        elementInputTextField.selectAll();
+    }
+
+    /**
+     * This method is used to validate and get user input
+     *
+     * @return BigDecimal User Input
+     * @throws IllegalArgumentException when invalid input is detected
+     * @throws NumberFormatException when user input contains invalid characters
+     */
+    public BigDecimal getUserInput() throws IllegalArgumentException, NumberFormatException {
+        try {
+            String strInput = elementInputTextField.getText();
+            if (strInput == null || strInput.isEmpty()) {
+                throw new IllegalArgumentException("Error: Input cannot be empty");
+            }
+            BigDecimal element = new BigDecimal(strInput);
+            if (element.compareTo(MAX_LIMIT) >= 0 || element.compareTo(MIN_LIMIT) <= 0) {
+                throw new IllegalArgumentException("Error: Input out of bound of [ " + MIN_LIMIT + ", " + MAX_LIMIT + " ]");
+            }
+            //No error, clean error logs if it has any
+            logTextField.setText("");
+            elementInputTextField.setText("");
+            return element;
+        } catch (NumberFormatException ne) {
+            throw new NumberFormatException("Error: Input can only be numerics");
+        }
+    }
+
+    /**
+     * This method is to display error message in the log text field
+     *
+     * @param msg the error message to be displayed
+     */
+    public void displayError(String msg) {
+        logTextField.setText("");
+        logTextField.setText(msg);
+        //Error happened, let's clean text input for user
+        elementInputTextField.setText("");
+        elementInputTextField.grabFocus();
+    }
+
+    /**
+     * This method is used to update element and history stacks. It will call
+     * StackMachine's print command
+     */
+    public void updateStacks() {
+        elementsTextArea.setText("");
+        commandsTextArea.setText("");
+        logTextField.setText("");
+        elementsTextArea.setText(stackMachine.print());
+        commandsTextArea.setText(stackMachine.printCommand());
+        try {
+            BigDecimal topElement = stackMachine.peek();
+            stackTopLabel.setText(topElement.toEngineeringString());
+        } catch (EmptyStackException e) {
+            logTextField.setText("Info: Elements stack now is empty.");
+            stackTopLabel.setText("");
+        }
     }
 
     /**
@@ -31,6 +100,8 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         quitButton = new javax.swing.JButton();
         logTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         elementInputTextField = new javax.swing.JTextField();
@@ -42,6 +113,7 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
         negButton = new javax.swing.JButton();
         mulButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
+        stackTopLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,48 +140,112 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
         logTextField.setForeground(new java.awt.Color(255, 0, 0));
         logTextField.setText("Log:");
 
+        jLabel4.setText("Element Stack TOP ^");
+
+        jLabel5.setText("Command Stack TOP ^");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(394, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(logTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                        .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         jLabel3.setText("Supported Instructions");
 
+        elementInputTextField.setText("Input number and cilick PUSH or hit ENTER");
+        elementInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                elementInputTextFieldKeyPressed(evt);
+            }
+        });
+
         popButton.setText("POP");
+        popButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popButtonActionPerformed(evt);
+            }
+        });
 
         pushButton.setText("PUSH");
+        pushButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pushButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("CLEAR");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         invertButton.setText("INV");
+        invertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invertButtonActionPerformed(evt);
+            }
+        });
 
         undoButton.setText("<<UNDO");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
 
         negButton.setText("NEG");
+        negButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                negButtonActionPerformed(evt);
+            }
+        });
 
         mulButton.setText("MUL");
+        mulButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mulButtonActionPerformed(evt);
+            }
+        });
 
         addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        stackTopLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,33 +257,25 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(101, 101, 101)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(elementInputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                    .addComponent(undoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                    .addComponent(stackTopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(mulButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(negButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(invertButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(elementInputTextField)
-                                .addGap(18, 18, 18)
-                                .addComponent(pushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(popButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(negButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(invertButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mulButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(popButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)))))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,18 +283,21 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(negButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(stackTopLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invertButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mulButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(negButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(invertButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(popButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -261,8 +392,110 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("OK");
+        dispose();
     }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void pushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pushButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            BigDecimal element = getUserInput();
+            stackMachine.push(element);
+            updateStacks();
+            elementInputTextField.setText("");
+            elementInputTextField.grabFocus();
+        } catch (NumberFormatException ne) {
+            displayError(ne.getMessage());
+        } catch (IllegalArgumentException e) {
+            displayError(e.getMessage());
+        }
+    }//GEN-LAST:event_pushButtonActionPerformed
+
+    private void elementInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_elementInputTextFieldKeyPressed
+        // TODO add your handling code here:
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+            try {
+                BigDecimal element = getUserInput();
+                stackMachine.push(element);
+                updateStacks();
+            } catch (NumberFormatException ne) {
+                displayError(ne.getMessage());
+            } catch (IllegalArgumentException e) {
+                displayError(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_elementInputTextFieldKeyPressed
+
+    private void popButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.pop();
+            updateStacks();
+        } catch (EmptyStackException ese) {
+            displayError("Info: Elements stack already empty");
+        }
+    }//GEN-LAST:event_popButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+        stackMachine.clear();
+        updateStacks();
+        logTextField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.add();
+            updateStacks();
+        } catch (IllegalArgumentException ese) {
+            displayError(ese.getMessage());
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void mulButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mulButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.multiply();
+            updateStacks();
+        } catch (IllegalArgumentException ese) {
+            displayError(ese.getMessage());
+        }
+    }//GEN-LAST:event_mulButtonActionPerformed
+
+    private void negButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.negate();
+            updateStacks();
+        } catch (EmptyStackException e) {
+            displayError("Invalid instruction: NEG command requires 1 number");
+        }
+    }//GEN-LAST:event_negButtonActionPerformed
+
+    private void invertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.invert();
+            updateStacks();
+        } catch (EmptyStackException e) {
+            displayError("Invalid instruction: INV command requires 1 number");
+        } catch (IllegalArgumentException ei) {
+            displayError(ei.getMessage());
+        }
+    }//GEN-LAST:event_invertButtonActionPerformed
+
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            stackMachine.undo();
+            updateStacks();
+        } catch (EmptyStackException e) {
+            displayError("Info: No more commands to be undone.");
+        } catch (IllegalArgumentException ei) {
+            displayError(ei.getMessage());
+        }
+    }//GEN-LAST:event_undoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,6 +543,8 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -324,6 +559,7 @@ public class PolishPostfixStackMachineMainEntry extends javax.swing.JFrame {
     private javax.swing.JButton popButton;
     private javax.swing.JButton pushButton;
     private javax.swing.JButton quitButton;
+    private javax.swing.JLabel stackTopLabel;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@
 package demo.nab;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -27,6 +28,16 @@ public class StackMachine {
     public StackMachine() {
         elements = new Stack<>();
         history = new Stack<>();
+    }
+
+    /**
+     * Peek the top element of elements stack
+     *
+     * @return BigDecimal top element
+     * @throws EmptyStackException if elements stack is empty
+     */
+    public BigDecimal peek() throws EmptyStackException {
+        return elements.peek();
     }
 
     /**
@@ -67,15 +78,19 @@ public class StackMachine {
      * Adds the top 2 elements on the stack and pushes the result back to the
      * stack
      *
-     * @throws EmptyStackException when elements stack contains less than 2
+     * @throws IllegalArgumentException when elements stack contains less than 2
      * elements
      */
-    public void add() throws EmptyStackException {
+    public void add() throws IllegalArgumentException {
+        if (elements.size() < 2) {
+            throw new IllegalArgumentException("Invalid instruction: ADD command requires 2 numbers");
+        }
+
         BigDecimal lhs = elements.peek();
+        elements.pop();
         BigDecimal rhs = elements.peek();
+        elements.pop();
         BigDecimal result = lhs.add(rhs);
-        elements.pop();
-        elements.pop();
         elements.push(result);
         Command cmd = new Command(lhs, rhs, "add");
         history.push(cmd);
@@ -85,15 +100,18 @@ public class StackMachine {
      * Multiplies the top 2 elements on the stack and pushes the result back to
      * the stack
      *
-     * @throws EmptyStackException when elements stack contains less than 2
+     * @throws IllegalArgumentException when elements stack contains less than 2
      * elements
      */
-    public void multiply() throws EmptyStackException {
+    public void multiply() throws IllegalArgumentException {
+        if (elements.size() < 2) {
+            throw new IllegalArgumentException("Invalid instruction: MUL command requires 2 numbers");
+        }
         BigDecimal lhs = elements.peek();
+        elements.pop();
         BigDecimal rhs = elements.peek();
+        elements.pop();
         BigDecimal result = lhs.multiply(rhs);
-        elements.pop();
-        elements.pop();
         elements.push(result);
         Command cmd = new Command(lhs, rhs, "mul");
         history.push(cmd);
@@ -128,7 +146,7 @@ public class StackMachine {
             throw new IllegalArgumentException("Invalid instruction: Cannot invert value 0");
         }
         BigDecimal invertor = new BigDecimal(1);
-        BigDecimal result = invertor.divide(lhs);
+        BigDecimal result = invertor.divide(lhs, MathContext.DECIMAL32);
         elements.pop();
         elements.push(result);
         Command cmd = new Command(lhs, null, "inv");
@@ -148,7 +166,6 @@ public class StackMachine {
      */
     public void undo() throws EmptyStackException, IllegalArgumentException {
         Command cmd = history.peek();
-        elements.peek();
         String cmdStr = cmd.getCommand();
         BigDecimal lhs = cmd.getLhs();
         BigDecimal rhs = cmd.getRhs();
@@ -167,27 +184,26 @@ public class StackMachine {
                 throw new IllegalArgumentException("Invalid arguments: Null value found in right hand side value.");
             }
             elements.pop();
-            elements.push(lhs);
             elements.push(rhs);
+            elements.push(lhs);
         } else if (cmdStr.equalsIgnoreCase("mul")) {
             if (rhs == null) {
                 throw new IllegalArgumentException("Invalid arguments: Null value found in right hand side value.");
             }
             elements.pop();
-            elements.push(lhs);
             elements.push(rhs);
+            elements.push(lhs);
         } else if (cmdStr.equalsIgnoreCase("neg")) {
-            BigDecimal orgValue = lhs.multiply(new BigDecimal(-1));
             elements.pop();
-            elements.push(orgValue);
+            elements.push(lhs);
         } else if (cmdStr.equalsIgnoreCase("inv")) {
             BigDecimal invertor = new BigDecimal(1);
             if (lhs.compareTo(new BigDecimal(0)) == 0) {
                 throw new IllegalArgumentException("Invalid arguments: divide by 0 error found.");
             }
-            BigDecimal orgValue = invertor.divide(lhs);
+            //BigDecimal orgValue = invertor.divide(lhs, MathContext.DECIMAL32);
             elements.pop();
-            elements.push(orgValue);
+            elements.push(lhs);
         }
 
         //process is finished, remove this history from stack
@@ -203,9 +219,10 @@ public class StackMachine {
             return "";
         }
         StringBuilder s1 = new StringBuilder();
-        BigDecimal[] arr = (BigDecimal[]) elements.toArray();
+        Object[] arr = elements.toArray();
         for (int i = 0; i < arr.length; i++) {
-            s1.append(arr[i]);
+            BigDecimal element = (BigDecimal) arr[i];
+            s1.append(element);
             //new line separated string for display
             //Use System.lineSeparator() to let it work in all OS.
             s1.append(System.lineSeparator());
@@ -223,9 +240,9 @@ public class StackMachine {
             return "";
         }
         StringBuilder s1 = new StringBuilder();
-        Command[] arr = (Command[]) history.toArray();
+        Object[] arr = history.toArray();
         for (int i = 0; i < arr.length; i++) {
-            Command cmd = arr[i];
+            Command cmd = (Command) arr[i];
             s1.append(cmd.getLhs());
             s1.append(", ");
             s1.append(cmd.getRhs() == null ? " " : cmd.getRhs());
