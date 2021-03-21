@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package JavaCodeChallenge.Solutions;
+
+/**
+ * Very basic sort algorithm : Insertion Sort
+ *
+ * @author tangz
+ */
+public class InsertSort {
+
+    public int[] InsertionSort(int[] inputArray, boolean bAsc) {
+        int key = 0;
+        int n = inputArray.length;
+        for (int i = 1; i < n; i++) {
+            key = inputArray[i];
+            int j = i - 1;
+            if (bAsc) {
+                while (j >= 0 && key < inputArray[j]) {
+                    inputArray[j + 1] = inputArray[j];
+                    j--;
+                }
+            } else {
+                while (j >= 0 && key > inputArray[j]) {
+                    inputArray[j + 1] = inputArray[j];
+                    j--;
+                }
+            }
+            inputArray[j + 1] = key;
+        }
+        return inputArray;
+    }
+
+    public int[] InsertionSortAsc(int[] arr) {
+        int key = 0;
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && key < arr[j]) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        return arr;
+    }
+
+    public String print(int[] inputArray) {
+        StringBuilder s1 = new StringBuilder();
+        s1.append("[");
+
+        if (inputArray.length == 0) {
+            s1.append("]");
+        } else {
+            for (int j = 0; j < inputArray.length; j++) {
+                s1.append(inputArray[j]);
+                if (j < inputArray.length - 1) {
+                    s1.append(", ");
+                } else {
+                    s1.append("]");
+                }
+            }
+        }
+        return s1.toString();
+    }
+
+    public static void main(String[] args) {
+        InsertSort s = new InsertSort();
+        //Test one 
+        int[] a = {1, 4, 5, 2, 3, 7, 9, 5};
+        System.out.println(s.print(s.InsertionSortAsc(a)));
+
+        int[] a1 = {4, 5, 1, 66, 29, 20, 20, -10, 0, 21, 12};
+        System.out.println(s.print(s.InsertionSortAsc(a1)));
+
+        int[] a2 = {12, 44, 5, 6, 2, 1, 23, 43, 7, 99};
+        System.out.println(s.print(s.InsertionSortAsc(a2)));
+
+        int[] a3 = {12};
+        System.out.println(s.print(s.InsertionSortAsc(a3)));
+
+        int[] a4 = {};
+        System.out.println(s.print(s.InsertionSortAsc(a4)));
+    }
+}
