@@ -11,40 +11,16 @@ package JavaCodeChallenge.Solutions;
  * @author tangz
  */
 public class InsertSort {
-
-    public int[] InsertionSort(int[] inputArray, boolean bAsc) {
-        int key = 0;
-        int n = inputArray.length;
-        for (int i = 1; i < n; i++) {
-            key = inputArray[i];
-            int j = i - 1;
-            if (bAsc) {
-                while (j >= 0 && key < inputArray[j]) {
-                    inputArray[j + 1] = inputArray[j];
-                    j--;
-                }
-            } else {
-                while (j >= 0 && key > inputArray[j]) {
-                    inputArray[j + 1] = inputArray[j];
-                    j--;
-                }
-            }
-            inputArray[j + 1] = key;
-        }
-        return inputArray;
-    }
-
     public int[] InsertionSortAsc(int[] arr) {
-        int key = 0;
         int n = arr.length;
         for (int i = 1; i < n; i++) {
-            key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && key < arr[j]) {
-                arr[j + 1] = arr[j];
-                j--;
+            int key = arr[i];
+            int prev = i - 1;
+            while (prev >= 0 && key < arr[prev]) {
+                arr[prev + 1] = arr[prev];
+                arr[prev] = key;
+                prev--;
             }
-            arr[j + 1] = key;
         }
         return arr;
     }
