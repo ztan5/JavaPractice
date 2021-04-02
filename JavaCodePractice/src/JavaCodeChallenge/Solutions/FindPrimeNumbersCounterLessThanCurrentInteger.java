@@ -5,6 +5,7 @@
  */
 package JavaCodeChallenge.Solutions;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,55 +21,67 @@ import java.util.Map;
  */
 public class FindPrimeNumbersCounterLessThanCurrentInteger {
 
-    public static int primeNumberBeforeMe(int n) {
-        if (n < 2) {
-            return 0;
-        }
-        if (n == 2) {
-            return 0;
-        }
-        if (n == 3) {
-            return 1;
-        }
-
-        if (isPrimeNumber(n)) {
-            return primeNumberBeforeMe(n - 1);
-        } else {
-            int diff = 0;
-            while (isPrimeNumber(n - diff) == false) {
-                diff++;
+//    This is the recursive way that I have written it myself
+//    However, it will cause stack overflow if the passed in number n is too big
+//    e.g  n = 499999
+//    public static int primeNumberBeforeMe(int n) {
+//        if (n < 2) {
+//            return 0;
+//        }
+//        if (n == 2) {
+//            return 0;
+//        }
+//        if (n == 3) {
+//            return 1;
+//        }
+//
+//        if (isPrimeNumber(n)) {
+//            return primeNumberBeforeMe(n - 1);
+//        } else {
+//            int diff = 0;
+//            while (isPrimeNumber(n - diff) == false) {
+//                diff++;
+//            }
+//            n = n - diff;
+//            return primeNumberBeforeMe(n) + 1;
+//        }
+//    }
+    
+    public static int primeNumberBeforeMe(int n){
+        int primeNumberCounter = 0;
+        for (int i = 2; i < n; i++){
+            if (isPrimeNumber(i)){
+                primeNumberCounter ++;
             }
-            n = n - diff;
-            return primeNumberBeforeMe(n) + 1;
         }
+        return primeNumberCounter;
     }
 
     public static boolean isPrimeNumber(int n) {
+
         if (n <= 1) {
             return false;
         }
-
-        if (n % 2 == 0 && n > 2) {
+        if (n == 2 || n == 3) {
+            return true;
+        }
+        if (n % 2 == 0 && n != 2) {
             return false;
         }
-
-        if (n % 3 == 0 && n > 3) {
+        if (n % 3 == 0 && n != 3) {
             return false;
         }
-
-        if (n % 5 == 0 && n > 5) {
+        if (n % 6 != 1 && n % 6 != 5) {
             return false;
         }
-
-        if (n % 7 == 0 && n > 7) {
-            return false;
-        }
-
-        for (int i = 2; i <= n; i++) {
-            if ((n % i == 0) && (i != n)) {
+        BigDecimal sqt = new BigDecimal(Math.sqrt(n));
+        long lower = sqt.longValue();
+        for (int i = 5; i <= lower; i += 6) {
+            if ((n % i == 0) || (n % (i + 2) == 0)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -84,7 +97,7 @@ public class FindPrimeNumbersCounterLessThanCurrentInteger {
         System.out.printf("There [%d] prime numbers before %d%n", primeNumberBeforeMe(9), 9);
         System.out.printf("There [%d] prime numbers before %d%n", primeNumberBeforeMe(10), 10);
         System.out.printf("There [%d] prime numbers before %d%n", primeNumberBeforeMe(11), 11);
-        System.out.printf("There [%d] prime numbers before %d%n", primeNumberBeforeMe(50000), 50000); //499979
+        System.out.printf("There [%d] prime numbers before %d%n", primeNumberBeforeMe(1500000), 1500000); //499979
 
     }
 }

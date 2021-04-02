@@ -3,42 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FirstNoneRepeatedCharacter2.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ReverseLinkedList.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/RotateArray.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/CreateADeadLockWorkerA.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/PrimeNumberGenerateThread.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/CreateADeadLock.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/RotateArrayTwoPointerWay.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/RemoveDuplicatesInArray.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/DistinctWordSetAndScanner.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/BinarySearch.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ThreadJoinDemoWorker.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/MedianOfTwoSortedArrays.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/LongestSubStringNoRepeatSolution2.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ParenthesisGenerateAllMyOwnSolution.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FibnacciRecursiveWay.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FullArrangement.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ThreadJoinDemo.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ParenthesesGenerateAllValidCombinations.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/DisplayTextFileToConsole.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/TwoSum.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/LongestSubStringNoRepeat.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/InsertSort.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FisrtNoneRepeatedCharacter.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/CreateADeadLockWorkerB.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/LongestSubStringNoRepeatQueueSolution.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ValidParentheses.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ParenthesesAllValidTry_ZhuTangOwnVersion.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/LinkedListDemo.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/SineWaveAnimationToIllustrateThread.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/JavaSubStringTest.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FindPrimeNumbersCounterLessThanCurrentInteger.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/PrimeNumberFactorTest.java</file>
             <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/PrimeNumberGenerator.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/BestTimeToBuyAndSellStockII.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ListNode.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/TwoSum.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/PrimeNumberGenerateThread.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/FisrtNoneRepeatedCharacter.java</file>
             <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/PriorityQueueDemo.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/CollectionAlgorithms.java</file>
-            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/AddTwoNumbers.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ThreadJoinDemoWorker.java</file>
+            <file>file:/D:/JavaPractice/JavaCodePractice/src/JavaCodeChallenge/Solutions/ThreadJoinDemo.java</file>
         </group>
     </open-files>
 </project-private>

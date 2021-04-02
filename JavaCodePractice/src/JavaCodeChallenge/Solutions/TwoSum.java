@@ -4,6 +4,9 @@
  */
 package JavaCodeChallenge.Solutions;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +24,9 @@ class Solution {
 //
 //        throw new IllegalArgumentException("No two sum solution");
 //    }
-
     public int[] twoSum(int[] input, int targetValue) {
 
-        int [] result = new int[2];
+        int[] result = new int[2];
         int pointerOne = 0;
         int pointerTwo = input.length - 1;
 
@@ -51,5 +53,13 @@ class Solution {
         int[] result = new int[2];
         result = s1.twoSum(numbers, 9);
         System.out.println("Result : [" + result[0] + "," + result[1] + "]");
+
+        int n = 11;
+        MathContext mc = new MathContext(3, RoundingMode.UP);
+        BigDecimal sqt = new BigDecimal(Math.sqrt(n), mc);
+        System.out.printf("Big Decimal Scale is %d%n", sqt.scale());
+        
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("The number of cores of CPU of current PC is: " + cores);
     }
 }
