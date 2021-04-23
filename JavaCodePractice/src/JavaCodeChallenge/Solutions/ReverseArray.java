@@ -17,20 +17,19 @@ public class ReverseArray {
 
     public void reserseArray(int[] nums) {
         int n = nums.length;
-        if (n ==0 || n==1){
+        if (n == 0 || n == 1) {
             return;
         }
-        
+
         int smallPointer = 0;
-        int bigPointer = n-1;
-        while (bigPointer >= smallPointer){
+        int bigPointer = n - 1;
+        while (bigPointer >= smallPointer) {
             int tmp = nums[bigPointer];
             nums[bigPointer] = nums[smallPointer];
             nums[smallPointer] = tmp;
             smallPointer++;
             bigPointer--;
         }
-        
     }
 
     public static void main(String[] args) {
@@ -54,12 +53,17 @@ public class ReverseArray {
         System.out.println("Original Array : " + Arrays.toString(t4));
         ra.reserseArray(t4);
         System.out.println("Reversed Array : " + Arrays.toString(t4));
-        
+
         int[] t5 = {1, 1, 1, 1, 2, 1};
         System.out.println("Original Array : " + Arrays.toString(t5));
         ra.reserseArray(t5);
         System.out.println("Reversed Array : " + Arrays.toString(t5));
-        
+
+        int[] t6 = {1,2,3,4,5,6,7,8,9,10,11};
+        System.out.println("Original Array : " + Arrays.toString(t6));
+        ra.reserseArray(t6);
+        System.out.println("Reversed Array : " + Arrays.toString(t6));
+
     }
 
 }

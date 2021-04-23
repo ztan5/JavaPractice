@@ -16,7 +16,7 @@ import java.util.concurrent.CyclicBarrier;
 public class PrimeNumberGenerator {
 
     public static void main(String[] args) {
-        int TEST_INT = 10000000;
+        int TEST_INT = 90000000;
         int THREAD_SIZE = 12;
         int ELEMENT_SIZE = THREAD_SIZE;
         int nThreads = TEST_INT / THREAD_SIZE;

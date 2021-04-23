@@ -31,32 +31,7 @@ public class PrimeNumberFactorTest {
 
         return result;
     }
-
-//    public static ArrayList<Integer> primeNumberFactorizer(int n) {
-//        ArrayList<Integer> result = new ArrayList<>();
-//        if (n <= 1) {
-//            return result;
-//        } else if (n == 2) {
-//            result.add(2);
-//        } else {
-//            if (isPrimitive(n)) {
-//                result.add(n);
-//            } else {
-//                for (int i = 2; i < n; i++) {
-//                    while (isPrimitive(i) && (n % i == 0)) {
-//                        result.add(i);
-//                        n = n / i;
-//                        if (isPrimitive(n)) {
-//                            result.add(n);
-//                            return result;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        return result;
-//    }
+    
     public static boolean isPrimitive(int n) {
         if (n <= 1) {
             return false;
